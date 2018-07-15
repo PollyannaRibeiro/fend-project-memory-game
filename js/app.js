@@ -7,12 +7,16 @@ const container = document.querySelector(".container");
 const list = document.createElement("ul");
 list.classList.add("deck");
 container.appendChild(list);
+const classIcons = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", 
+                    "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
+shuffle(classIcons);
 for (let i= 0; i<classIcons.length; i++){
     const card = document.createElement("li");
     card.classList.add("card");
     list.appendChild(card);
     const icon = document.createElement("i");
     icon.classList.add("fa");
+    icon.classList.add(classIcons[i]);
     card.appendChild(icon);
 
 }
