@@ -20,6 +20,14 @@ for (let i= 0; i<classIcons.length; i++){
     card.appendChild(icon);
 
 }
+const cards = document.getElementsByClassName("card");
+
+for (elem of cards){
+    elem.onclick = function(event){
+        event.target.classList.add("open", "show");
+        console.log("cliquei", elem, event);
+    }
+}
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
