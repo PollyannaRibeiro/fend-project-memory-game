@@ -2,7 +2,20 @@
  * Create a list that holds all of your cards
  */
 
+const container = document.querySelector(".container");
 
+const list = document.createElement("ul");
+list.classList.add("deck");
+container.appendChild(list);
+for (let i= 0; i<classIcons.length; i++){
+    const card = document.createElement("li");
+    card.classList.add("card");
+    list.appendChild(card);
+    const icon = document.createElement("i");
+    icon.classList.add("fa");
+    card.appendChild(icon);
+
+}
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
