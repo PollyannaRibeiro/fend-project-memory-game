@@ -26,7 +26,32 @@ for (elem of cards){
     elem.onclick = function(event){
         event.target.classList.add("open", "show");
         console.log("cliquei", elem, event);
+// Matching cards
+
+function compareClass(array){
+
+    const elem1 = array[0];
+    const elem2 = array[1];
+
+    const iconElem1 = elem1.firstElementChild.getAttribute("class");
+    const iconElem2 = elem2.firstElementChild.getAttribute("class");
+
+    if (iconElem1 === iconElem2){
+        elem1.classList.remove("show");
+        elem2.classList.remove("show");
+        elem1.classList.add("match");
+        elem2.classList.add("match");   
     }
+    else{
+        elem1.classList.add("error");
+        elem2.classList.add("error");
+        
+        setTimeout(function(){
+            elem1.classList.remove("open", "show", "error");
+            elem2.classList.remove("open", "show", "error");
+        }, 1000);
+    }
+
 }
 /*
  * Display the cards on the page
