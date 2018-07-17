@@ -138,3 +138,21 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+
+/* Congratulation div */
+
+div .congrat{
+    transition: all 5s ease;
+    width: 660px;
+    min-height: 700px;
+    background-color: white;
+    margin-top: -730px;
+    z-index: 2;
+    text-align: center;
+}
+
+div .congrat h2{
+    margin-top: 3em;
+
+}

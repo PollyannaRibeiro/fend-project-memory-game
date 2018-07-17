@@ -26,6 +26,18 @@ for (elem of cards){
     elem.onclick = function(event){
         event.target.classList.add("open", "show");
         console.log("cliquei", elem, event);
+        const match = document.getElementsByClassName("match");
+        if (match.length === 16){
+            setTimeout(function(){
+                congratMensage();
+            }, 800);
+        }
+        console.log(match);
+    }  
+    
+    
+    
+}
 // Matching cards
 
 function compareClass(array){
@@ -86,3 +98,10 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+function congratMensage() {
+    const congratulations = document.createElement("div");
+    congratulations.classList.add("congrat");
+    congratulations.innerHTML = "<h2>Congratulations!</br>You Won!</h2>"
+    
+    return container.appendChild(congratulations);  
+}
