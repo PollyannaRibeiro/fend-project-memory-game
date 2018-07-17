@@ -7,6 +7,7 @@ counter = 0;
 const list = document.createElement("ul");
 list.classList.add("deck");
 container.appendChild(list);
+const reseting = document.getElementById("restart");
 
 const classIcons = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", 
                     "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
@@ -204,6 +205,19 @@ function scoreDown(){
     }
 }
 
+// Reset
+
+function reset(elem, remove){
+    
+    elem.onclick = function(){
+        moves = 0;
+        setupGame(); 
+        countingMoves(moves);
+        starScoreReset();
+        container.removeChild(remove);
+        console.log("resetou");
+    }
+}
 
 // Congratulation message
 function congratMessage() {
