@@ -74,7 +74,7 @@ function setupGame() {
                 
                 console.log("TEMPO: " + diff/1000)
                 setTimeout(function () {
-                    congratMensage();
+                    congratMessage();
                 }, 700);
             }
             scoreDown();
@@ -202,12 +202,27 @@ function scoreDown(){
     }
 }
 
-// Congratulation mensage
 
-function congratMensage() {
+// Congratulation message
+function congratMessage() {
     const congratulations = document.createElement("div");
     congratulations.classList.add("congrat");
-    congratulations.innerHTML = "<h2>Congratulations!</br>You Won!</h2>"
+    congratulations.innerHTML = "<h2>Congratulations!</br>You Won!</h2>";
+    const h3 = document.createElement("h3");
+    const h4 = document.createElement("h4");
+    const h5 = document.createElement("h5");
+    h3.textContent = `with ${moves} moves and ${showStar()} stars`
+    h4.textContent = `Time: ${finalTime} seconds`;
+    h5.textContent = `${phrase()}`;
+    congratulations.appendChild(h3);
+    congratulations.appendChild(h4);
+    congratulations.appendChild(h5);
+
+    const button = document.createElement("button");
+    button.classList.add("button");
+    button.textContent = "Play again!"
+    congratulations.appendChild(button);
+    reset(button, congratulations);
     
-    return container.appendChild(congratulations);  
+    return container.appendChild(congratulations);     
 }
