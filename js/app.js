@@ -4,7 +4,10 @@ moves = 0;
 let list;
 let time1;
 let time2;
-let finalTime;
+let totalTime;
+let intervalToken;
+const timer = document.getElementById("timer");
+
 
 //List of cards
 
@@ -18,14 +21,19 @@ setupGame();
 function setupGame() {
     
     if (list){
-        container.removeChild(list);     
+        container.removeChild(list);   
+        clearInterval(intervalToken);  
+        timer.textContent = null;
     }
+
+    
 
     list = document.createElement("ul");
     list.classList.add("deck");
     container.appendChild(list);
 
-    setupImages(shuffle(classIcons));
+    //setupImages(shuffle(classIcons));
+    setupImages(classIcons);
 
     const cards = document.getElementsByClassName("card");
     for (elem of cards) {
@@ -35,7 +43,7 @@ function setupGame() {
             moves += 1;
             if (moves === 1) {
                 time1 = new Date();
-                console.log("começou");
+                intervalToken = setupTimer();
             }
             const openCards = document.getElementsByClassName("show");
             if (openCards.length === 2) {
@@ -92,6 +100,19 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
+}
+
+// Timer
+
+function setupTimer(){
+    timer.textContent = `Timer: ${0}`;
+    return setInterval(function(){
+        time2 = new Date(); 
+        const diff = time2.getTime() - time1.getTime();
+        totalTime = Math.floor(diff/1000);
+        timer.textContent = `Timer: ${totalTime}`;
+
+    }, 1000);
 }
 
 // Matching cards
@@ -208,7 +229,7 @@ function congratMessage() {
     const h4 = document.createElement("h4");
     const h5 = document.createElement("h5");
     h3.textContent = `with ${moves} moves and ${showStar()} stars`
-    h4.textContent = `Time: ${finalTime} seconds`;
+    h4.textContent = `Time: ${totalTime} seconds`;
     h5.textContent = `${phrase()}`;
     congratulations.appendChild(h3);
     congratulations.appendChild(h4);
