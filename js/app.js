@@ -33,6 +33,55 @@ for (elem of cards){
        scoreDown();
        countingMoves(moves);
     }  
+setupGame();
+                  
+function setupGame() {
+    
+    if (list){
+        container.removeChild(list);     
+    }
+
+    list = document.createElement("ul");
+    list.classList.add("deck");
+    container.appendChild(list);
+
+    setupImages(shuffle(classIcons));
+
+    const cards = document.getElementsByClassName("card");
+    for (elem of cards) {
+        elem.onclick = function (event) {
+            event.target.classList.add("open", "show");
+            
+            moves += 1;
+            if (moves === 1) {
+                time1 = new Date();
+                console.log("começou");
+            }
+            const openCards = document.getElementsByClassName("show");
+            if (openCards.length === 2) {
+                if (compareClass(openCards)){
+                    const match = document.getElementsByClassName("match");
+                    for (elem of match){
+                        elem.onclick = null;
+                    }
+                }
+            }
+            const match = document.getElementsByClassName("match");
+            if (match.length === 16) {
+                time2 = new Date(); 
+                const diff = time2.getTime() - time1.getTime();
+                finalTime = Math.ceil(diff/1000);
+                
+                console.log("TEMPO: " + diff/1000)
+                setTimeout(function () {
+                    congratMensage();
+                }, 700);
+            }
+            scoreDown();
+            countingMoves(moves);
+            reset(reseting);
+        };
+    }
 }
 
 // Defining card images
