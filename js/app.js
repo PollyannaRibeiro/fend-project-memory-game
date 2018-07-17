@@ -161,7 +161,35 @@ function starScore(){
     
     lastStar.classList.remove("fa-star")
     lastStar.classList.add("fa-star-o");
+function starScoreReset(){
+    const score = document.getElementsByClassName("fa-star-o");
+    while(score.length > 0){
+        const elem = score[0];
+        elem.classList.remove("fa-star-o")
+        elem.classList.add("fa-star");
+    }
+}
 
+function showStar(){
+    const score = document.getElementsByClassName("fa-star");
+    if(score.length>0){
+        return score.length;
+    } else{
+        return 0;
+    }
+}
+
+function phrase(){
+    switch(showStar()){
+        case 0:
+            return "It's a shame! :p";
+        case 1:
+            return "Could be better, try again!";
+        case 2: 
+            return "Not so bad :p";
+        case 3: 
+        return "Amazing!";
+    }
 }
 
 function scoreDown(){
