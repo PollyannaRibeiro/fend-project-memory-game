@@ -33,6 +33,10 @@ h1 {
     font-weight: 300;
 }
 
+span{
+    padding: 0 2em;
+}
+
 /* Styles for the deck of cards */
 
 .deck {
@@ -132,7 +136,6 @@ h1 {
 .score-panel #restart {
     float: right;
     cursor: pointer;
-    margin-left: 5em;
 }
 
 /* Congratulation div */
