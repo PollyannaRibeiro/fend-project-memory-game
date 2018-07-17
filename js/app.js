@@ -45,6 +45,7 @@ function setupGame() {
                 time1 = new Date();
                 intervalToken = setupTimer();
             }
+           
             const openCards = document.getElementsByClassName("show");
             if (openCards.length === 2) {
                 if (compareClass(openCards)){
@@ -151,8 +152,6 @@ function compareClass(array){
 const score = document.getElementsByClassName("fa-star");
 const lastStar = score[score.length-1];
 
-console.log(lastStar);
-
 function starScore(){
     const score = document.getElementsByClassName("fa-star");
     const lastStar = score[score.length-1];
@@ -211,8 +210,9 @@ function reset(elem, remove){
         setupGame(); 
         countingMoves(moves);
         starScoreReset();
-        container.removeChild(remove);
-        console.log("resetou");
+        if (remove != null){
+            container.removeChild(remove);
+        }
     }
 }
 
