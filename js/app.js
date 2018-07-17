@@ -63,7 +63,7 @@ function setupGame() {
             }
             scoreDown();
             countingMoves(moves);
-            reset(reseting);
+            reset(reseting, congratulations);
         };
     }
 }
