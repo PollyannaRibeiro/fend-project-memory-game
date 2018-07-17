@@ -128,7 +128,9 @@ function compareClass(array){
         elem1.classList.remove("show");
         elem2.classList.remove("show");
         elem1.classList.add("match");
-        elem2.classList.add("match");   
+        elem2.classList.add("match"); 
+        return true;  
+    
     }
     else{
         elem1.classList.add("error");
@@ -138,8 +140,8 @@ function compareClass(array){
             elem1.classList.remove("open", "show", "error");
             elem2.classList.remove("open", "show", "error");
         }, 1000);
+        return false;
     }
-
 }
 
 // Score Painel
