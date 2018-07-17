@@ -1,40 +1,27 @@
-/*
- * Create a list that holds all of your cards
- */
+//List of cards
 
 const container = document.querySelector(".container");
+moves = 0;
+counter = 0;
 
 const list = document.createElement("ul");
 list.classList.add("deck");
 container.appendChild(list);
+
 const classIcons = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", 
                     "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
-shuffle(classIcons);
-for (let i= 0; i<classIcons.length; i++){
-    const card = document.createElement("li");
-    card.classList.add("card");
-    list.appendChild(card);
-    const icon = document.createElement("i");
-    icon.classList.add("fa");
-    icon.classList.add(classIcons[i]);
-    card.appendChild(icon);
 
-}
+setupImages(shuffle(classIcons));
 const cards = document.getElementsByClassName("card");
 
-// Add open and show class to the cards
-
-const cards = document.getElementsByClassName("card");
 for (elem of cards){
     elem.onclick = function(event){
         event.target.classList.add("open", "show");
-        console.log("cliquei", elem, event);
-
+        moves+=1;
         const openCards = document.getElementsByClassName("show");
 
         if (openCards.length === 2){
             compareClass(openCards);
-            counter +=1;
         }
 
         const match = document.getElementsByClassName("match");
@@ -43,12 +30,41 @@ for (elem of cards){
                 congratMensage();
             }, 800);
         }
-        console.log(match);
+       scoreDown();
+       countingMoves(moves);
     }  
-    
-    
-    
 }
+
+// Defining card images
+
+function setupImages (array){
+    for (let i= 0; i<array.length; i++){
+        const card = document.createElement("li");
+        card.classList.add("card");
+        list.appendChild(card);
+        const icon = document.createElement("i");
+        icon.classList.add("fa");
+        icon.classList.add(array[i]);
+        card.appendChild(icon);
+    
+    }
+}
+
+// Shuffle the cards
+
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+    return array;
+}
+
 // Matching cards
 
 function compareClass(array){
@@ -76,39 +92,41 @@ function compareClass(array){
     }
 
 }
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+// Score Painel
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+ function countingMoves(el){
+    const moving = document.getElementById("moves");
+    return moving.textContent = `${el} moves`;
+ }
+ 
+ 
+const score = document.getElementsByClassName("fa-star");
+const lastStar = score[score.length-1];
 
-    return array;
+console.log(lastStar);
+
+function starScore(){
+    const score = document.getElementsByClassName("fa-star");
+    const lastStar = score[score.length-1];
+    
+    lastStar.classList.remove("fa-star")
+    lastStar.classList.add("fa-star-o");
+
 }
 
+function scoreDown(){
+    switch(moves){
+        case 30:
+        case 35:
+        case 40:
+            starScore();
+            break;
+    }
+}
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+// Congratulation mensage
+
 function congratMensage() {
     const congratulations = document.createElement("div");
     congratulations.classList.add("congrat");

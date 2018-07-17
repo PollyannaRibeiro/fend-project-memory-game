@@ -78,10 +78,6 @@ h1 {
     cursor: default;
 }
 
-.deck .card.show {
-    font-size: 33px;
-}
-
 .deck .card.match {
     cursor: default;
     background: #02ccba;
@@ -129,6 +125,10 @@ h1 {
     margin: 0 5px 0 0;
 }
 
+.score-panel #moves {
+    padding-left: 1em;
+}
+
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
@@ -143,7 +143,6 @@ h1 {
 /* Congratulation div */
 
 div .congrat{
-    transition: all 5s ease;
     width: 660px;
     min-height: 700px;
     background-color: white;
