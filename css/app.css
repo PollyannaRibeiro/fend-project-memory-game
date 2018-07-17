@@ -151,7 +151,29 @@ div .congrat{
     text-align: center;
 }
 
-div .congrat h2{
-    margin-top: 3em;
+div .congrat .button{
+    margin-top: 2em;
+    padding: 1em 1.5em;
+    border-radius: 0.7em;
+    font-size: 1.8em;
+    background-color: #02ccba;
+    color: white;
+    box-shadow: 5px 5px 11px -4px #000000;
+}
 
+div .congrat .button:hover{
+    background-color: #02ccbbab;
+}
+
+div .congrat h2{
+    margin-top: 2em;
+    font-size: 2.5em;
+}
+
+div .congrat h3, h4, h5 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 0;
 }
