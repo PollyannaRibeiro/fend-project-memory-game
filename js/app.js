@@ -56,11 +56,7 @@ function setupGame() {
             }
             const match = document.getElementsByClassName("match");
             if (match.length === 16) {
-                time2 = new Date(); 
-                const diff = time2.getTime() - time1.getTime();
-                finalTime = Math.ceil(diff/1000);
-                
-                console.log("TEMPO: " + diff/1000)
+                clearInterval(intervalToken);
                 setTimeout(function () {
                     congratMessage();
                 }, 700);
