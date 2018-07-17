@@ -26,15 +26,12 @@ function setupGame() {
         timer.textContent = null;
     }
 
-    
-
     list = document.createElement("ul");
     list.classList.add("deck");
     container.appendChild(list);
 
-    //setupImages(shuffle(classIcons));
-    setupImages(classIcons);
-
+   setupImages(shuffle(classIcons));
+   
     const cards = document.getElementsByClassName("card");
     for (elem of cards) {
         elem.onclick = function (event) {
@@ -64,7 +61,7 @@ function setupGame() {
             }
             scoreDown();
             countingMoves(moves);
-            reset(reseting, congratulations);
+            reset(reseting, null);
         };
     }
 }
@@ -171,23 +168,26 @@ function starScoreReset(){
 
 function showStar(){
     const score = document.getElementsByClassName("fa-star");
-    if(score.length>0){
-        return score.length;
+    if (score.length>=2){
+        return `${score.length} stars`;
+
+    } else if (score.length = 1){
+        return "1 star";
     } else{
-        return 0;
+        return "0 star";
     }
 }
 
 function phrase(){
     switch(showStar()){
         case 0:
-            return "It's a shame! :p";
+            return "That's a shame! Try again! :)";
         case 1:
-            return "Could be better, try again!";
+            return "Could be better, try again! :)";
         case 2: 
-            return "Not so bad :p";
+            return "Not so bad! :)";
         case 3: 
-        return "Amazing!";
+        return "Amazing!;";
     }
 }
 
@@ -224,7 +224,7 @@ function congratMessage() {
     const h3 = document.createElement("h3");
     const h4 = document.createElement("h4");
     const h5 = document.createElement("h5");
-    h3.textContent = `with ${moves} moves and ${showStar()} stars`
+    h3.textContent = `with ${moves} moves and ${showStar()}`
     h4.textContent = `Time: ${totalTime} seconds`;
     h5.textContent = `${phrase()}`;
     congratulations.appendChild(h3);
