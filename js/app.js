@@ -1,39 +1,18 @@
-//List of cards
 
 const container = document.querySelector(".container");
 moves = 0;
-counter = 0;
+let list;
+let time1;
+let time2;
+let finalTime;
 
-const list = document.createElement("ul");
-list.classList.add("deck");
-container.appendChild(list);
+//List of cards
+
 const reseting = document.getElementById("restart");
 
 const classIcons = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", 
                     "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
 
-setupImages(shuffle(classIcons));
-const cards = document.getElementsByClassName("card");
-
-for (elem of cards){
-    elem.onclick = function(event){
-        event.target.classList.add("open", "show");
-        moves+=1;
-        const openCards = document.getElementsByClassName("show");
-
-        if (openCards.length === 2){
-            compareClass(openCards);
-        }
-
-        const match = document.getElementsByClassName("match");
-        if (match.length === 16){
-            setTimeout(function(){
-                congratMensage();
-            }, 800);
-        }
-       scoreDown();
-       countingMoves(moves);
-    }  
 setupGame();
                   
 function setupGame() {
@@ -88,6 +67,7 @@ function setupGame() {
 // Defining card images
 
 function setupImages (array){
+
     for (let i= 0; i<array.length; i++){
         const card = document.createElement("li");
         card.classList.add("card");
@@ -96,7 +76,6 @@ function setupImages (array){
         icon.classList.add("fa");
         icon.classList.add(array[i]);
         card.appendChild(icon);
-    
     }
 }
 
@@ -152,7 +131,6 @@ function compareClass(array){
     return moving.textContent = `${el} moves`;
  }
  
- 
 const score = document.getElementsByClassName("fa-star");
 const lastStar = score[score.length-1];
 
@@ -163,7 +141,9 @@ function starScore(){
     const lastStar = score[score.length-1];
     
     lastStar.classList.remove("fa-star")
-    lastStar.classList.add("fa-star-o");
+    lastStar.classList.add("fa-star-o");   
+}
+
 function starScoreReset(){
     const score = document.getElementsByClassName("fa-star-o");
     while(score.length > 0){
