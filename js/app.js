@@ -22,10 +22,21 @@ for (let i= 0; i<classIcons.length; i++){
 }
 const cards = document.getElementsByClassName("card");
 
+// Add open and show class to the cards
+
+const cards = document.getElementsByClassName("card");
 for (elem of cards){
     elem.onclick = function(event){
         event.target.classList.add("open", "show");
         console.log("cliquei", elem, event);
+
+        const openCards = document.getElementsByClassName("show");
+
+        if (openCards.length === 2){
+            compareClass(openCards);
+            counter +=1;
+        }
+
         const match = document.getElementsByClassName("match");
         if (match.length === 16){
             setTimeout(function(){
