@@ -63,10 +63,17 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    transform-style: preserve-3d;
+    transition: all .3s ease;
+    transform: rotateY(180deg);
+}
+
+.deck .card.show {
+    font-size: 33px;
 }
 
 .deck .card.open {
-    transform: rotateY(0);
+    transform: rotateY(0deg);
     background: #02b3e4;
     cursor: default;
 }
@@ -79,7 +86,31 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    animation-delay: 2s;
+    animation: shake 0.5s;
+    transition-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
 }
+
+.deck .card.error{
+    transition: background-color 0.5s ease;
+    background-color: rgba(255, 94, 0, 0.822);
+    animation: shake-error 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: scale(1, 1); }
+    33% { transform: scale(1.2, 0.8); }
+    66% { transform: scale(0.8, 1.2); }
+    100% { transform: scale(1, 1); }
+}
+  
+@keyframes shake-error {
+    10%, 90% { transform: translate(-1px, 0);}
+    20%, 80% { transform: translate(2px, 0);}
+    30%, 50%, 70% { transform: translate(-4px, 0);}
+    40%, 60% { transform: translate(4px, 0);}
+}
+
 
 /*
  * Styles for the Score Panel
