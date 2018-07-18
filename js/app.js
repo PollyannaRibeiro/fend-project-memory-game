@@ -165,9 +165,11 @@ function starScoreReset(){
         elem.classList.add("fa-star");
     }
 }
+let starResult;
 
 function showStar(){
     const score = document.getElementsByClassName("fa-star");
+    starResult = score.length;
     if (score.length>=2){
         return `${score.length} stars`;
 
@@ -179,7 +181,7 @@ function showStar(){
 }
 
 function phrase(){
-    switch(showStar()){
+    switch(starResult){
         case 0:
             return "That's a shame! Try again! :)";
         case 1:
@@ -187,7 +189,7 @@ function phrase(){
         case 2: 
             return "Not so bad! :)";
         case 3: 
-        return "Amazing!;";
+            return "Amazing!";
     }
 }
 
