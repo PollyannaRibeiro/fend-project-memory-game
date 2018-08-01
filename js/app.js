@@ -3,7 +3,6 @@ const container = document.querySelector(".container");
 moves = 0;
 let list;
 let time1;
-let time2;
 let totalTime;
 let intervalToken;
 const timer = document.getElementById("timer");
@@ -11,29 +10,15 @@ const timer = document.getElementById("timer");
 
 //List of cards
 
-const reseting = document.getElementById("restart");
-
-const classIcons = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", 
-                    "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
-
 setupGame();
                   
 function setupGame() {
     
-    if (list){
-        container.removeChild(list);   
-        clearInterval(intervalToken);  
-        timer.textContent = null;
-    }
-
-    list = document.createElement("ul");
-    list.classList.add("deck");
-    container.appendChild(list);
-
-   setupImages(shuffle(classIcons));
+    creatingDeck();
+    definingImages();
    
     const cards = document.getElementsByClassName("card");
-    for (elem of cards) {
+    for (elem of cards) { 
         elem.onclick = function (event) {
             event.target.classList.add("open", "show");
             
@@ -45,6 +30,7 @@ function setupGame() {
            
             const openCards = document.getElementsByClassName("show");
             if (openCards.length === 2) {
+
                 if (compareClass(openCards)){
                     const match = document.getElementsByClassName("match");
                     for (elem of match){
@@ -61,15 +47,29 @@ function setupGame() {
             }
             scoreDown();
             countingMoves(moves);
+
+            const reseting = document.getElementById("restart");
             reset(reseting, null);
         };
     }
 }
 
+function creatingDeck(){
+    if (list){
+        container.removeChild(list);   
+        clearInterval(intervalToken);  
+        timer.textContent = null;
+    }
+
+    list = document.createElement("ul");
+    list.classList.add("deck");
+    container.appendChild(list);
+}
+
 // Defining card images
 
-function setupImages (array){
 
+function setupImages (array){
     for (let i= 0; i<array.length; i++){
         const card = document.createElement("li");
         card.classList.add("card");
@@ -79,6 +79,12 @@ function setupImages (array){
         icon.classList.add(array[i]);
         card.appendChild(icon);
     }
+}
+function definingImages(){
+    const classIcons = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", 
+                    "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
+
+    setupImages(shuffle(classIcons));
 }
 
 // Shuffle the cards
@@ -101,7 +107,7 @@ function shuffle(array) {
 function setupTimer(){
     timer.textContent = `Timer: ${0}`;
     return setInterval(function(){
-        time2 = new Date(); 
+        let time2 = new Date(); 
         const diff = time2.getTime() - time1.getTime();
         totalTime = Math.floor(diff/1000);
         timer.textContent = `Timer: ${totalTime}`;
@@ -132,6 +138,7 @@ function compareClass(array){
         elem2.classList.add("error");
         
         setTimeout(function(){
+
             elem1.classList.remove("open", "show", "error");
             elem2.classList.remove("open", "show", "error");
         }, 1000);
