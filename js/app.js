@@ -20,15 +20,15 @@ function setupGame() {
     const cards = document.getElementsByClassName("card");
     for (elem of cards) { 
         elem.onclick = function (event) {
-            event.target.classList.add("open", "show");
             
-            moves += 1;
-            if (moves === 1) {
-                time1 = new Date();
-                intervalToken = setupTimer();
-            }
-           
             const openCards = document.getElementsByClassName("show");
+            if(openCards.length === 2){
+                return;
+            }
+            event.target.classList.add("open", "show");
+
+            setupMoves();
+           
             if (openCards.length === 2) {
 
                 if (compareClass(openCards)){
@@ -46,13 +46,14 @@ function setupGame() {
                 }, 700);
             }
             scoreDown();
-            countingMoves(moves);
+            //countingMoves(moves);
 
             const reseting = document.getElementById("restart");
             reset(reseting, null);
         };
     }
 }
+
 
 function creatingDeck(){
     if (list){
@@ -144,6 +145,17 @@ function compareClass(array){
         }, 1000);
         return false;
     }
+}
+
+
+function setupMoves(){
+    moves += 1;
+    if (moves === 1) {
+        time1 = new Date();
+        intervalToken = setupTimer();
+    }
+
+    countingMoves(moves);
 }
 
 // Score Painel
