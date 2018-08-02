@@ -20,14 +20,17 @@ function setupGame() {
     const cards = document.getElementsByClassName("card");
     for (elem of cards) { 
         elem.onclick = function (event) {
+
+            if (time1 === undefined){
+                time1 = new Date();
+                intervalToken = setupTimer();
+            }
             
             const openCards = document.getElementsByClassName("show");
             if(openCards.length === 2){
                 return;
             }
             event.target.classList.add("open", "show");
-
-            setupMoves();
            
             if (openCards.length === 2) {
 
@@ -37,6 +40,8 @@ function setupGame() {
                         elem.onclick = null;
                     }
                 }
+                
+                setupMoves();
             }
             const match = document.getElementsByClassName("match");
             if (match.length === 16) {
@@ -82,10 +87,10 @@ function setupImages (array){
     }
 }
 function definingImages(){
-    const classIcons = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb", 
-                    "fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
+    const classIcons = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-leaf", "fa-bicycle", "fa-bomb"];
 
-    setupImages(shuffle(classIcons));
+
+    setupImages(shuffle(classIcons.concat(classIcons)));
 }
 
 // Shuffle the cards
@@ -150,11 +155,6 @@ function compareClass(array){
 
 function setupMoves(){
     moves += 1;
-    if (moves === 1) {
-        time1 = new Date();
-        intervalToken = setupTimer();
-    }
-
     countingMoves(moves);
 }
 
@@ -162,7 +162,7 @@ function setupMoves(){
 
  function countingMoves(el){
     const moving = document.getElementById("moves");
-    return moving.textContent = `${el} moves`;
+    moving.textContent = `${el} moves`;
  }
  
 const score = document.getElementsByClassName("fa-star");
@@ -214,9 +214,9 @@ function phrase(){
 
 function scoreDown(){
     switch(moves){
-        case 30:
-        case 35:
-        case 40:
+        case 15:
+        case 17:
+        case 20:
             starScore();
             break;
     }
@@ -234,6 +234,7 @@ function reset(elem, remove){
         if (remove != null){
             container.removeChild(remove);
         }
+        time1 = undefined;
     }
 }
 
