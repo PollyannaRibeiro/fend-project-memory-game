@@ -36,7 +36,9 @@ h1 {
 span{
     padding: 0 2em;
 }
-
+i{
+    pointer-events: none;
+}
 /* Styles for the deck of cards */
 
 .deck {
