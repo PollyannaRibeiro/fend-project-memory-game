@@ -214,9 +214,9 @@ function phrase(){
 
 function scoreDown(){
     switch(moves){
-        case 15:
-        case 17:
         case 20:
+        case 22:
+        case 25:
             starScore();
             break;
     }
